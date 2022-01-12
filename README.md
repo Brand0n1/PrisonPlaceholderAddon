@@ -12,5 +12,5 @@ Fixes how Prison handels some placeholders
 This plugin makes it so that if you are in rank "Z" on the server the progress bar ("prison_rcb_default") will switch from the default progress bar
 to the prestige progress bar, showing your players how much more progress they have until they can prestige.
 
-If the player is in any rank other than Z once the amount needed to rankup is reached the dallor amount will be changed to /rankup
-If the player is in rank Z and the prestige progress bar is filled up then the dallor amount will change to /prestige
+If the player is in any rank other than Z once the rankup bar is full it will then turn into /rankup
+If the player is in rank Z and the prestige progress bar is filled the bar will then change to /prestige
