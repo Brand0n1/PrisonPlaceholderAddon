@@ -79,6 +79,7 @@ public class PlaceholderFix extends PlaceholderExpansion {
                 return getPrestigeBar(p, "%prison_rcb_prestiges%");
             }
         }
+//        bar = ChatColor.translateAlternateColorCodes('&', "&7["+bar+"&7]&r");
         return bar;
     }
 
@@ -88,6 +89,7 @@ public class PlaceholderFix extends PlaceholderExpansion {
         if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a" + strippedBar))) {
             return "/prestige";
         }
+//        bar = ChatColor.translateAlternateColorCodes('&', "&7["+bar+"&7]&r");
         return bar;
     }
 }
