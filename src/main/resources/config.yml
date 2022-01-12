@@ -4,8 +4,7 @@
 #                                                                    #
 ######################################################################
 # Config can only be reloaded by restarting/reloading the server
-
-
+#
 # Set the max rank for the plugin to look for
 max rank: Z
 

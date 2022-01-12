@@ -5,13 +5,12 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 
-import java.util.Objects;
-
 public class PlaceholderFix extends PlaceholderExpansion {
-    private static PrisonPlaceholderAddon plugin = PrisonPlaceholderAddon.getPlugin(PrisonPlaceholderAddon.class); // Get this from main
+
+    private final PrisonPlaceholderAddon plugin;
 
     public PlaceholderFix(PrisonPlaceholderAddon plugin) {
-        PlaceholderFix.plugin = plugin;
+        this.plugin = plugin;
     }
 
     @Override
@@ -57,7 +56,7 @@ public class PlaceholderFix extends PlaceholderExpansion {
     }
 
     private String getRankupMessage(OfflinePlayer p, String str) {
-        String maxRank = plugin.getConfig().getString("max rank");
+        String maxRank = plugin.getConfig().getString("max rank").toUpperCase();
         String rank = PlaceholderAPI.setPlaceholders(p, "%prison_rank_default%");
         String price = PlaceholderAPI.setPlaceholders(p, str);
         String prestigePrice = PlaceholderAPI.setPlaceholders(p, "%prison_rcf_prestiges::nFormat:#,##0.00:0:kmbt%");
@@ -70,8 +69,7 @@ public class PlaceholderFix extends PlaceholderExpansion {
     }
 
     private String getRankupBar(OfflinePlayer p, String str) {
-        String maxRank = plugin.getConfig().getString("max rank");
-        String rankupMessage = plugin.getConfig().getString("rankup message");
+        String maxRank = plugin.getConfig().getString("max rank").toUpperCase();
         String rank = PlaceholderAPI.setPlaceholders(p, "%prison_rank_default%");
         String bar = PlaceholderAPI.setPlaceholders(p, str);
         String strippedBar = ChatColor.stripColor(bar);
@@ -80,31 +78,28 @@ public class PlaceholderFix extends PlaceholderExpansion {
             barFormat = bar;
         else
             barFormat = barFormat.replace("%bar%", bar);
-        bar = ChatColor.translateAlternateColorCodes('&', barFormat);
         if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a" + strippedBar))) {
-            return rankupMessage;
+            return "/rankup";
         }
-        if (bar.isEmpty() || bar.equalsIgnoreCase(" ")) {
-            if (rank.equalsIgnoreCase(maxRank)) {
-                return getPrestigeBar(p, "%prison_rcb_prestiges%");
-            }
+        if (rank.equalsIgnoreCase(maxRank)) {
+            return getPrestigeBar(p, "%prison_rcb_prestiges%");
         }
+        bar = ChatColor.translateAlternateColorCodes('&', barFormat);
         return bar;
     }
 
     private String getPrestigeBar(OfflinePlayer p, String str) {
         String bar = PlaceholderAPI.setPlaceholders(p, str);
-        String prestigeMessage = plugin.getConfig().getString("prestige message");
         String strippedBar = ChatColor.stripColor(bar);
         String barFormat = plugin.getConfig().getString("bar format");
         if (barFormat == null)
             barFormat = bar;
         else
             barFormat = barFormat.replace("%bar%", bar);
-        bar = ChatColor.translateAlternateColorCodes('&', barFormat);
         if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a" + strippedBar))) {
-            return prestigeMessage;
+            return "/prestige";
         }
+        bar = ChatColor.translateAlternateColorCodes('&', barFormat);
         return bar;
     }
 }
