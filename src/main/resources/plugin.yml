@@ -4,6 +4,6 @@ main: me.brand0n_.prisonplaceholderaddon.PrisonPlaceholderAddon
 authors: [ Brand0n_ ]
 description: Fix errors in prison placeholders
 
-depend:
+softdepend:
   - Prison
   - PlaceholderAPI
