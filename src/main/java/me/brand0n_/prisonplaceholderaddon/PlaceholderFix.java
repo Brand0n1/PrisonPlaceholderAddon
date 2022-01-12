@@ -71,11 +71,12 @@ public class PlaceholderFix extends PlaceholderExpansion {
         String rank = PlaceholderAPI.setPlaceholders(p, "%prison_rank_default%");
         String bar = PlaceholderAPI.setPlaceholders(p, str);
         String strippedBar = ChatColor.stripColor(bar);
+        if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a" + strippedBar))) {
+            return "/rankup";
+        }
         if (bar.isEmpty() || bar.equalsIgnoreCase(" ")) {
             if (rank.equalsIgnoreCase("Z")) {
                 return getPrestigeBar(p, "%prison_rcb_prestiges%");
-            } else if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a"+strippedBar))) {
-                return "/rankup";
             }
         }
         return bar;
@@ -84,10 +85,8 @@ public class PlaceholderFix extends PlaceholderExpansion {
     private String getPrestigeBar(OfflinePlayer p, String str) {
         String bar = PlaceholderAPI.setPlaceholders(p, str);
         String strippedBar = ChatColor.stripColor(bar);
-        if (bar.isEmpty() || bar.equalsIgnoreCase(" ")) {
-            if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a"+strippedBar))) {
-                return "/prestige";
-            }
+        if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a" + strippedBar))) {
+            return "/prestige";
         }
         return bar;
     }
