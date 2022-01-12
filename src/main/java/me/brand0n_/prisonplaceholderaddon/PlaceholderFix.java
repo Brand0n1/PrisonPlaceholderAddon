@@ -2,6 +2,7 @@ package me.brand0n_.prisonplaceholderaddon;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 
 public class PlaceholderFix extends PlaceholderExpansion {
@@ -57,24 +58,24 @@ public class PlaceholderFix extends PlaceholderExpansion {
     private String getRankupMessage(OfflinePlayer p, String str) {
         String rank = PlaceholderAPI.setPlaceholders(p, "%prison_rank_default%");
         String price = PlaceholderAPI.setPlaceholders(p, str);
+        String prestigePrice = PlaceholderAPI.setPlaceholders(p, "%prison_rcf_prestiges::nFormat:#,##0.00:0:kmbt%");
         if (price.isEmpty() || price.equalsIgnoreCase(" ")) {
             if (rank.equalsIgnoreCase("Z")) {
-                if (getPrestigeBar(p, "%prison_rcb_prestiges%").isEmpty() ||
-                        getPrestigeBar(p, "%prison_rcb_prestiges%").equalsIgnoreCase(" ")) {
-                    return "/prestige";
-                }
+                return prestigePrice;
             }
-            return "/rankup";
         }
-        return "$"+price;
+        return price;
     }
 
     private String getRankupBar(OfflinePlayer p, String str) {
         String rank = PlaceholderAPI.setPlaceholders(p, "%prison_rank_default%");
         String bar = PlaceholderAPI.setPlaceholders(p, str);
+        String strippedBar = ChatColor.stripColor(bar);
         if (bar.isEmpty() || bar.equalsIgnoreCase(" ")) {
             if (rank.equalsIgnoreCase("Z")) {
                 return getPrestigeBar(p, "%prison_rcb_prestiges%");
+            } else if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a"+strippedBar))) {
+                return "/rankup";
             }
         }
         return bar;
@@ -82,8 +83,11 @@ public class PlaceholderFix extends PlaceholderExpansion {
 
     private String getPrestigeBar(OfflinePlayer p, String str) {
         String bar = PlaceholderAPI.setPlaceholders(p, str);
+        String strippedBar = ChatColor.stripColor(bar);
         if (bar.isEmpty() || bar.equalsIgnoreCase(" ")) {
-            return "/prestige";
+            if (bar.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&a"+strippedBar))) {
+                return "/prestige";
+            }
         }
         return bar;
     }
