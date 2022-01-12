@@ -1,0 +1,19 @@
+######################################################################
+#                                                                    #
+#                             Config.yml                             #
+#                                                                    #
+######################################################################
+# Config can only be reloaded by restarting/reloading the server
+
+
+# Set the max rank for the plugin to look for
+max rank: Z
+
+# Rankup message
+rankup message: "/rankup"
+
+# Prestige message
+prestige message: "/prestige"
+
+# Set how the bar will appear
+bar format: "&7[%bar%&7]&r"
